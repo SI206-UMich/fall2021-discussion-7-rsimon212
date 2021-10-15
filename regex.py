@@ -23,24 +23,35 @@ def find_word(string_list):
     """ Return a list of words that contain three digit numbers in the middle. """
 
     # initialize an empty list
-
+    lst = []
     # define the regular expression
-
+    
     # loop through each line of the string list 
+    for string in string_list:
+        regex = re.findall('\b(\S+)\d{3}(\S+)', string)
+        for x in regex:
+            lst.append(x)
+    return lst
+
 
     # find all the words that match the regular expression in each line
     
     # loop through the found words and add the words to your empty list 
 
     #return the list of all words that start with the letter B, E, or T
-    pass
 
 
 def find_days(string_list):
     """ Return a list of days from the list of strings the dates format in the text are MM/DD/YYYY. """  
 
     # initialize an empty list
-
+    dates_list = []
+    expression = r'\d{1,2}/(\d{1,2})/\d{4}'
+    for string in string_list:
+        regex = re.findall(expression,string)
+        for x in regex:
+            dates_list.append(x)
+    return dates_list
     # define the regular expression
 
     # loop through each line of the string list
@@ -50,15 +61,21 @@ def find_days(string_list):
     # loop through the found dates and only add the days to your empty list 
     
     #return the list of days
-    pass
+
 
 def find_domains(string_list):
     """ Return a list of web address domains from the list of strings the domains of a wbsite are after www. """
 
     # initialize an empty list
-
+    domains_list = []
+    expression = r'https?://[\w.]+'
     # define the regular expression
-
+    for string in string_list:
+        regex = re.findall(expression,string)
+        for x in regex:
+            domain = x.split('//')[1].strip('www.')
+            domains_list.append(domain)
+    return domains_list
     # loop through each line of the string list
 
     # find all the domains that match the regular expression in each line
@@ -71,7 +88,6 @@ def find_domains(string_list):
     # add the domains to your empty list
     
     #return the list of domains
-    pass
 
 class TestAllMethods(unittest.TestCase):
 
